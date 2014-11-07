@@ -17,6 +17,9 @@ require 'logger'
 
 require 'sinatra'
 require "sinatra/reloader" if development?
+require 'sinatra/namespace'
+
+require "byebug"
 
 require 'twitter'
 
@@ -36,7 +39,7 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 require APP_ROOT.join('config', 'database')
 
 
-credentials = YAML.load(File.open("config/credentials.yml"))
+credentials = YAML.load(File.open("config/credentials.yaml"))
 $client = Twitter::REST::Client.new do |config|
    config.consumer_key        = credentials["twitter_consumer_key"]
   config.consumer_secret     = credentials["twitter_consumer_secret"]

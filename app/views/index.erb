@@ -1,4 +1,34 @@
-<form action="/tweets/submit" method="post">
-<textarea rows="4" cols="30" name="body"></textarea>
-<button type="submit" name="tweet" value="tweet">tweet</button>
+    <script>
+      $(document).ready(function(){
+        $("#modal").hide();
+        $("#tweet").submit(function(){
+          $("#modal").show();
+        });
+      });
+
+    </script>
+
+
+<form id="tweet" action="/tweets/submit" method="post">
+  <textarea type='text' rows="4" cols="30" name="body"></textarea>
+  <button type="submit" name="tweet" value="tweet">tweet</button>
 </form>
+<div class="container"> </div>
+
+<div id="modal">
+  <img id="loader" src="ajax-loader.gif"/>
+</div>
+
+<div id="results"></div>
+
+
+
+
+
+
+
+
+
+
+
+
