@@ -20,8 +20,7 @@ require 'twitter'
 require 'erb'
 require 'yaml'
 require "json"
-require "daybreak"
-require 'oauth'
+require 'omniauth-twitter'
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))

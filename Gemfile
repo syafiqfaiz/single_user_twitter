@@ -20,6 +20,8 @@ gem 'shotgun'
 
 gem "byebug"
 
+gem 'omniauth-twitter'
+
 group :test do
   gem 'faker'
   gem 'rspec'
