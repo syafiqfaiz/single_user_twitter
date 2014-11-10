@@ -1,9 +1,9 @@
 enable :sessions
 
-# namespace '/user' do
+
 
   use OmniAuth::Builder do
-    provider :twitter, "K679OFUQmtPucB0ztkPG6VS6F", "w6YWCmOGfr0O8GSjR7z2Ep64PdAdLL10HnktnQVMZWeLN2wUGz"
+    provider :twitter, credentials["twitter_consumer_key"], credentials["twitter_consumer_secret"]
   end
 
   get '/login' do
@@ -13,8 +13,22 @@ enable :sessions
 
   get '/auth/twitter/callback' do
     env['omniauth.auth'] ? session[:admin] = true : halt(401,'Not Authorized')
-    session[:token] = env['omniauth.auth']['credentials']['token']
-    session[:secret] = env['omniauth.auth']['credentials']['secret']
+
+    current_user = User.find_by(uid: env['omniauth.auth']['info']['uid'])
+    if current_user != nil
+      current_user.last_login = Time.now
+      current_user.login
+    else
+      new_user = User.new
+      new_user.uid = env['omniauth.auth']['info']['uid']
+      new_user.username = env['omniauth.auth']['info']['username']
+      new_user.email = env['omniauth.auth']['info']['email']
+      new_user.token = env['omniauth.auth']['credentials']['token']
+      new_user.secret = env['omniauth.auth']['credentials']['secret']
+      new_user.updated_at = Time.now
+      new_user.created_at = Time.now
+      new_user.save
+    end
     redirect "/"
   end
 
@@ -22,4 +36,3 @@ enable :sessions
     params[:message]
   end
 
-# end
