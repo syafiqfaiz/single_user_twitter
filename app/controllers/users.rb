@@ -18,7 +18,7 @@ enable :sessions
     if current_user != nil
       current_user.updated_at = Time.now
       session[:id] = current_user.id
-      current_user.twitter_client(current_user.token, current_user.secret)
+
     else
       new_user = User.new
       new_user.uid = env['omniauth.auth']['uid']
@@ -29,7 +29,7 @@ enable :sessions
       new_user.created_at = Time.now
       new_user.save
       session[:id] = new_user.id
-      new_user.twitter_client(new_user.token,new_user.secret)
+
     end
     redirect "/"
   end
