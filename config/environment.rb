@@ -34,7 +34,6 @@ require APP_ROOT.join('config', 'database')
 
 
 credentials = YAML.load(File.open("config/credentials.yaml"))
-$client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = credentials["twitter_consumer_key"]
-  config.consumer_secret     = credentials["twitter_consumer_secret"]
-end
+consumer_key        = credentials["twitter_consumer_key"]
+consumer_secret     = credentials["twitter_consumer_secret"]
+

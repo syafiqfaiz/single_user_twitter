@@ -1,10 +1,5 @@
 enable :sessions
 
- def login
-    logged_user = User.find(session[:id])
-    session[:token] = logged_user.token
-    session[:secret] = logged_user.secret
-  end
 
   credentials = YAML.load(File.open("config/credentials.yaml"))
   use OmniAuth::Builder do
@@ -23,7 +18,7 @@ enable :sessions
     if current_user != nil
       current_user.updated_at = Time.now
       session[:id] = current_user.id
-      login
+      current_user.twitter_client(current_user.token, current_user.secret)
     else
       new_user = User.new
       new_user.uid = env['omniauth.auth']['uid']
@@ -34,7 +29,7 @@ enable :sessions
       new_user.created_at = Time.now
       new_user.save
       session[:id] = new_user.id
-      login
+      new_user.twitter_client(new_user.token,new_user.secret)
     end
     redirect "/"
   end
