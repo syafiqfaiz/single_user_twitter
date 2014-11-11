@@ -8,20 +8,22 @@
 
     </script>
 
+<div class="container">
+  <form id="tweet" action="/tweets/submit" method="post">
+    <textarea type='text' rows="4" cols="30" name="body"></textarea>
+    <button type="submit" name="tweet" value="tweet">tweet</button>
+  </form>
 
-<form id="tweet" action="/tweets/submit" method="post">
-  <textarea type='text' rows="4" cols="30" name="body"></textarea>
-  <button type="submit" name="tweet" value="tweet">tweet</button>
-</form>
-<div class="container"> </div>
 
-<div id="modal">
-  <img id="loader" src="ajax-loader.gif"/>
+  <div id="modal">
+    <img id="loader" src="ajax-loader.gif"/>
+  </div>
+
+  <div id="results"></div>
+
+  <a href='/login'><button>login</button></a>
+
 </div>
-
-<div id="results"></div>
-
-
 
 
 
