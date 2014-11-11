@@ -19,6 +19,9 @@ require 'erb'
 require 'yaml'
 require "json"
 require 'omniauth-twitter'
+require 'sidekiq'
+require 'redis'
+require 'sidekiq/api'
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))

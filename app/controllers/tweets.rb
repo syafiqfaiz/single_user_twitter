@@ -1,8 +1,9 @@
 enable :sessions
 
   post '/tweets/submit' do
-    twitter_client = User.twitter_client(session[:id])
-    twitter_client.update(params[:body])
+    user = User.find(session[:id])
+    tweet = user.tweets.create(text:params[:body], created_at: Time.now)
+
     redirect 'tweets/user_stream'
   end
 

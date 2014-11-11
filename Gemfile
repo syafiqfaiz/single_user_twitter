@@ -21,6 +21,10 @@ gem "byebug"
 
 gem 'omniauth-twitter'
 
+gem 'sidekiq'
+gem 'redis'
+
+
 group :test do
   gem 'faker'
   gem 'rspec'

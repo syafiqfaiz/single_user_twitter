@@ -10,12 +10,10 @@ class User < ActiveRecord::Base
         config.access_token        = user.token
         config.access_token_secret = user.secret
       end
-
       twitter_client
   end
 
   def fetch_tweets(twitter_client)
-
     if self.tweets == nil
       twitter_client.user_timeline.each do |tweet|
         self.tweets.create(text: tweet.text, created_at: Time.now)
@@ -31,7 +29,11 @@ class User < ActiveRecord::Base
       end
       self.tweets.last(10)
     end
+  end
 
+  def tweet(status)
+    tweet = tweets.create!(:status => status)
+    TweetWorker.perform_async(tweet.id)
   end
 
 end
