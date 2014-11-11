@@ -14,7 +14,7 @@ enable :sessions
   get '/auth/twitter/callback' do
     env['omniauth.auth'] ? session[:admin] = true : halt(401,'Not Authorized')
 
-    current_user = User.find_by(uid: env['omniauth.auth']['info']['uid'])
+    current_user = User.find_by(uid: env['omniauth.auth']['uid'])
     if current_user != nil
       current_user.updated_at = Time.now
       session[:id] = current_user.id

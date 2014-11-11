@@ -5,8 +5,8 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :uid
       t.string :token
       t.string :secret
-      t.date :updated_at
-      t.date :created_at
+      t.datetime :updated_at
+      t.datetime :created_at
       t.timestamp
     end
   end
